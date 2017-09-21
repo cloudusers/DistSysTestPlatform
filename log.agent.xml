@@ -1,0 +1,35 @@
+<seelog>
+	<outputs formatid="main">
+		<filter levels="debug">
+			<rollingfile type="size"
+				filename="debug.agent.log"
+				maxsize="50000000"
+				maxrolls="5"
+			/>
+		</filter>
+		<filter levels="info">
+			<rollingfile type="size"
+				filename="info.agent.log"
+				maxsize="50000000"
+				maxrolls="5"
+			/>
+		</filter>
+		<filter levels="error">
+			<rollingfile type="size"
+				filename="error.agent.log"
+				maxsize="50000000"
+				maxrolls="5"
+			/>
+		</filter>
+		<filter levels="critical">
+			<rollingfile type="size"
+				filename="fatal.agent.log"
+				maxsize="50000000"
+				maxrolls="5"
+			/>
+		</filter>
+	</outputs>
+	<formats>
+		<format id="main" format="%Date %Time [%LEV] [%File:%Line] [%Func] %Msg%n"/>
+	</formats>
+</seelog>

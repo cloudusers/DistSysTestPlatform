@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dstp name="distribute sys abnormal test agent">
+	<base> 
+		<usergroup>coterie.tech</usergroup>
+		<listen>8091</listen>
+		<agent_listen>8091</agent_listen>
+		<sche_listen></sche_listen>
+		<log>log.agent.xml</log>
+	</base>
+</dstp>
+

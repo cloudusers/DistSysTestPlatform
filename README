@@ -1,0 +1,56 @@
+"Introduce"####################################
+distribute system abnormal test agent(dstp)
+	dstp-agetn is a tool which produce abnormal status such 
+		a. package loss,package reorder....,
+		b. disk can not read/write
+		c. cpu run with 100% 
+		d. memory alloc alots space and so on 
+
+when run dstp-agent, you should send abnormal request by client-ctl tool which send httprequest to dstp-agent(http-server)
+
+
+"References"####################################
+https://github.com/osrg/namazu
+https://github.com/netflix
+https://github.com/hookswitch
+https://github.com/AkihiroSuda
+https://github.com/gorilla
+https://github.com/google/gopacket
+git.apache.org/thrift.git/lib/go/thrift
+
+"Source modify"###################################
+##github.com/hanwen/go-fuse/fuse/nodefs/fuse.go
+mountOpts := fuse.MountOptions{} 
+========>
+mountOpts := fuse.MountOptions{
+	    Options: []string{"nonempty"},
+} 
+
+github.com/hanwen/go-fuse/fuse/mount_linux.go
+github.com/hanwen/go-fuse/fuse/server.go
+add function :
+ExecRelease(mountPoint string, op string) (err error)
+
+"Resume(when ethernet or disk not work)"#################################
+	iptables -F
+	tc qdisc del dev eth0 handle 10: root
+
+	umount -l your_fuse_dir
+
+
+"Usage"##############################################
+
+(1) "start inspect workers with daemon mode"
+./dstp-agent &
+
+(2) "send ethernet request. such package delay"
+NOTICE: host is dstp-agent host;  targetip is packaget (loss/reorder/duplicate) ip
+
+./client-ctl -host=127.0.0.1 -duration=30 -interval=10 -ethernet=yes -targetip=10.134.99.128
+after this shell, package will delay 100ms and persist 30s, you can ping 10.134.99.128 to check delay
+
+
+"Report or contact"##################################
+clouduser@163.com
+https://github.com/cloudusers
+www.coterie.tech
